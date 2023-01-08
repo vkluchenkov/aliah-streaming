@@ -5,6 +5,9 @@ interface Result {
   meta: {
     name: string;
   };
+  status: {
+    state: 'ready' | 'inprogress' | 'error' | 'live-inprogress';
+  };
   duration: number;
   input: {
     width: number;

@@ -1,9 +1,54 @@
+@keyframes live {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
   gap: 15px;
   overflow: hidden;
+  border-radius: 15px;
+  padding: 0 0 15px;
+  position: relative;
 }
+
+.card_live {
+  border: 2px solid red;
+}
+
+.live {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.live::after {
+  content: 'LIVE';
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.live::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  animation-name: live;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
 .card__title {
   font-size: 18px;
   line-height: 1.2;

@@ -8,7 +8,15 @@ const Home: NextPage<ClodFLareResponse> = ({ result, success, errors, messages }
   const videos = result.map((video) => {
     const title = new Date(video.created).toLocaleDateString('pl');
 
-    return <VideoCard key={video.uid} uid={video.uid} thumbnail={video.thumbnail} title={title} />;
+    return (
+      <VideoCard
+        key={video.uid}
+        uid={video.uid}
+        thumbnail={video.thumbnail}
+        title={title}
+        isLive={video.status.state === 'live-inprogress'}
+      />
+    );
   });
 
   return (
