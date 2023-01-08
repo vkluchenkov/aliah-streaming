@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+
+.logo__wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 232/55;
+  margin: 0 auto;
+  object-fit: contain;
+}

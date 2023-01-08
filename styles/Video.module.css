@@ -1,0 +1,12 @@
+.video__container {
+  position: fixed;
+  top: 110px;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+}
+
+.video {
+  height: 100%;
+  /* border: 1px solid red; */
+}
