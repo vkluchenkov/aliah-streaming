@@ -22,3 +22,7 @@ export interface ClodFLareResponse {
   errors: any[];
   messages: any[];
 }
+
+export interface User {
+  isLoggedIn: boolean;
+}

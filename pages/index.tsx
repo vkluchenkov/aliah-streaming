@@ -7,7 +7,6 @@ import { VideoCard } from '../src/components/VideoCard';
 const Home: NextPage<ClodFLareResponse> = ({ result, success, errors, messages }) => {
   const videos = result.map((video) => {
     const title = new Date(video.created).toLocaleDateString('pl');
-
     return (
       <VideoCard
         key={video.uid}
@@ -19,17 +18,13 @@ const Home: NextPage<ClodFLareResponse> = ({ result, success, errors, messages }
     );
   });
 
-  return (
+  return videos.length ? (
     <>
-      {videos.length ? (
-        <>
-          <h1 className={styles.header}>Recent videos</h1>
-          <section className={styles.videos}>{videos}</section>
-        </>
-      ) : (
-        <h3 className={styles.sorry}>No videos found</h3>
-      )}
+      <h1 className={styles.header}>Recent videos</h1>
+      <section className={styles.videos}>{videos}</section>
     </>
+  ) : (
+    <h3 className={styles.sorry}>No videos found</h3>
   );
 };
 
@@ -47,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
 
   return {
-    props: { ...data },
+    props: { ...data, protected: true },
   };
 };
 
