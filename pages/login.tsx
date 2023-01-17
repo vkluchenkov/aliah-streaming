@@ -35,7 +35,7 @@ const Login: NextPage = () => {
     setIsLoader(true);
     setIsError(false);
 
-    await axios
+    axios
       .post('api/login', { pin: pin })
       .then((data) => {
         localStorage.setItem('pin', pin);
@@ -45,10 +45,9 @@ const Login: NextPage = () => {
       .catch((error: any) => {
         setIsError(true);
         setUser(false);
+        setIsBtnDisabled(false);
+        setIsLoader(false);
       });
-
-    setIsBtnDisabled(false);
-    setIsLoader(false);
   };
 
   if (isLoader) return <Loader />;

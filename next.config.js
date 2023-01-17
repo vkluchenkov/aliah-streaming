@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ['customer-txeadyjkmimy8r9z.cloudflarestream.com'],
   },
+  output: 'standalone',
 };
 
 module.exports = nextConfig;

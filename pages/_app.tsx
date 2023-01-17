@@ -14,23 +14,18 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const pin = localStorage.getItem('pin');
-    if (!pin) router.push('/login');
-  }, []);
-
-  useEffect(() => {
-    const pin = localStorage.getItem('pin');
-    if (pin && !user)
+    if (pageProps.protected && !user)
       axios
         .post('api/login', { pin: pin })
         .then((data) => {
           setUser(true);
-          localStorage.setItem('pin', pin);
+          localStorage.setItem('pin', pin as string);
         })
         .catch((error: any) => {
-          setUser(false);
           localStorage.removeItem('pin');
+          router.push('/login');
         });
-  }, [router, setUser, user]);
+  }, [router, setUser, user, pageProps]);
 
   if (pageProps.protected && !user)
     return (
