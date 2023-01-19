@@ -13,7 +13,7 @@ interface CardProps {
 export const VideoCard: React.FC<CardProps> = ({ uid, thumbnail, title, isLive }) => {
   return (
     <Link href={`/video/${uid}`}>
-      <article className={clsx(styles.card, isLive ? styles.card_live : '')}>
+      <article className={clsx(styles.card, isLive && styles.card_live)}>
         {isLive && <div className={styles.live} />}
         <div className={styles.card__image}>
           <Image src={thumbnail} style={{ objectFit: 'cover' }} fill alt={title} />

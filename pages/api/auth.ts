@@ -11,14 +11,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const dir = process.env.NODE_ENV === 'production' ? '/data' : DEV_DATA_DIR!;
   const savedPin = await fsp.readFile(path.join(dir, 'pin'), { encoding: 'utf-8' });
 
-  const payload = jwt.verify(token, secret);
-
-  if (payload) {
-    const { pin } = payload as JwtPayload;
-    const isMatch = pin === savedPin;
-    if (isMatch) res.status(200).send('Ok');
-    else res.status(401).send({ message: 'Unauthorized' });
-  } else res.status(401).send({ message: 'Unauthorized' });
+  try {
+    const payload = jwt.verify(token, secret);
+    if (payload) {
+      const { pin } = payload as JwtPayload;
+      const isMatch = pin === savedPin;
+      if (isMatch) res.status(200).send('Ok');
+      else throw new Error();
+    } else throw new Error();
+  } catch (error) {
+    res.status(401).send({ message: 'Unauthorized' });
+  }
 };
 
 export default handler;
