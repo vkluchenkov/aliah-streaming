@@ -13,16 +13,15 @@ export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    const pin = localStorage.getItem('pin');
+    const token = localStorage.getItem('token');
     if (pageProps.protected && !user)
       axios
-        .post('api/login', { pin: pin })
+        .post('api/auth', { token: token })
         .then((data) => {
           setUser(true);
-          localStorage.setItem('pin', pin as string);
         })
         .catch((error: any) => {
-          localStorage.removeItem('pin');
+          localStorage.removeItem('token');
           router.push('/login');
         });
   }, [router, setUser, user, pageProps]);

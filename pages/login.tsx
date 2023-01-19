@@ -37,8 +37,8 @@ const Login: NextPage = () => {
 
     axios
       .post('api/login', { pin: pin })
-      .then((data) => {
-        localStorage.setItem('pin', pin);
+      .then((res) => {
+        localStorage.setItem('token', res.data);
         setUser(true);
         router.push('/');
       })
