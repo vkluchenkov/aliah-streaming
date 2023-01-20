@@ -1,6 +1,7 @@
 Dockerfile
 .dockerignore
 node_modules
+data
 npm-debug.log
 README.md
 .next

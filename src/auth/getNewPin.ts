@@ -15,7 +15,7 @@ export const getNewPin = async () => {
   if (dirContent.length) dirContent.forEach(async (file) => await fsp.unlink(path.join(dir, file)));
 
   // Write pin hash as a file in data folder
-  const file = await fsp.writeFile(path.join(dir, 'pin'), hashed);
+  await fsp.writeFile(path.join(dir, 'pin'), hashed);
 
   // Send new pin
   console.log(pin);
