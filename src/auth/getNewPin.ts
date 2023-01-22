@@ -15,10 +15,10 @@ export const getNewPin = async () => {
   const dirContent = await fsp.readdir(dir);
   if (dirContent.length) dirContent.forEach(async (file) => await fsp.unlink(path.join(dir, file)));
 
-  // Write pin hash as a file in data folder
+  // Write pin hash in the "pin" file in data folder
   await fsp.writeFile(path.join(dir, 'pin'), hashed);
 
-  // Send new pin
+  // Send new pin to admin email
   if (process.env.NODE_ENV === 'production') {
     const fromEmail = process.env.ADMIN_EMAIL!;
     const senderName = process.env.ADMIN_NAME!;
