@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import path from 'node:path';
 import * as fsp from 'node:fs/promises';
+import { sendMail } from '../email/sendMail';
 
 const generatePin = () => Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -18,5 +19,23 @@ export const getNewPin = async () => {
   await fsp.writeFile(path.join(dir, 'pin'), hashed);
 
   // Send new pin
-  console.log(pin);
+  if (process.env.NODE_ENV === 'production') {
+    const fromEmail = process.env.ADMIN_EMAIL!;
+    const senderName = process.env.ADMIN_NAME!;
+    const toEmail = process.env.NOTIFICATIONS_RECEIVER!;
+    const mailContent = `<html>
+    <body>
+    <h3>Your new pin is ${pin}</h3>
+    </body>
+    </html>`;
+
+    sendMail({
+      fromEmail: fromEmail,
+      senderName: senderName,
+      toEmail: toEmail,
+      toName: 'Aliah',
+      subject: 'New PIN for Aliah team online',
+      content: mailContent,
+    });
+  } else console.log(pin);
 };
