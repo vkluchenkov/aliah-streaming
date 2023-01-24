@@ -19,7 +19,7 @@ export const getNewPin = async () => {
   await fsp.writeFile(path.join(dir, 'pin'), hashed);
 
   // Send new pin to admin email
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV != 'production') {
     const fromEmail = process.env.ADMIN_EMAIL!;
     const senderName = process.env.ADMIN_NAME!;
     const toEmail = process.env.NOTIFICATIONS_RECEIVER!;

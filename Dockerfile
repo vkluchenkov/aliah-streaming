@@ -49,10 +49,14 @@ COPY .env.local .
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+COPY route.sh /root/route.sh
+RUN apk add --no-cache bash
+RUN apk add --no-cache curl
+
 USER root
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["npx", "concurrently", "node server.js", "bash /root/route.sh"]
